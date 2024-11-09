@@ -103,6 +103,24 @@ class _MyAppState extends State<MyApp> {
               ),
               InkWell(
                 onTap: () async {
+                  await _networkMidiControllerPlugin.enableService();
+                },
+                child: const Text('Enable Service'),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              InkWell(
+                onTap: () async {
+                  await _networkMidiControllerPlugin.disableService();
+                },
+                child: const Text('Disable Service'),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              InkWell(
+                onTap: () async {
                   await sendMIDICommand(
                     commandType: 'noteOn',
                     note: 'C',

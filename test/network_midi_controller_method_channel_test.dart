@@ -14,7 +14,7 @@ void main() {
         .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
-        return '42';
+        return 'iOS';
       },
     );
   });

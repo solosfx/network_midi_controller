@@ -15,13 +15,33 @@ class MethodChannelNetworkMidiController extends NetworkMidiControllerPlatform {
     return version;
   }
 
-  // Initialize the MIDI broadcast with the specified [port] and service Name.
+  /// Initialize the MIDI Controller.
   @override
   Future<void> initialize() async {
     try {
       await methodChannel.invokeMethod('initialize');
     } on PlatformException catch (e) {
       print("Failed to initialize MIDI Controller service: ${e.message}");
+    }
+  }
+
+  /// Enable MIDI Network Session
+  @override
+  Future<void> enableService() async {
+    try {
+      await methodChannel.invokeMethod('enableService');
+    } on PlatformException catch (e) {
+      print("Failed to enable MIDI Network Session: ${e.message}");
+    }
+  }
+
+  /// Disable MIDI Network Session
+  @override
+  Future<void> disableService() async {
+    try {
+      await methodChannel.invokeMethod('disableService');
+    } on PlatformException catch (e) {
+      print("Failed to disable MIDI Network Session: ${e.message}");
     }
   }
 

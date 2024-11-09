@@ -9,6 +9,14 @@ class NetworkMidiController {
     return NetworkMidiControllerPlatform.instance.initialize();
   }
 
+  Future<void> enableService() {
+    return NetworkMidiControllerPlatform.instance.enableService();
+  }
+
+  Future<void> disableService() {
+    return NetworkMidiControllerPlatform.instance.disableService();
+  }
+
   /// Sends a MIDI command.
   Future<void> sendMIDICommand({
     required int channelCommand,

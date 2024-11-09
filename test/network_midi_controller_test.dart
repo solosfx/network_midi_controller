@@ -23,6 +23,16 @@ class MockNetworkMidiControllerPlatform
   }) {
     throw UnimplementedError();
   }
+  
+  @override
+  Future<void> disableService() {
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<void> enableService() {
+    throw UnimplementedError();
+  }
 }
 
 void main() {

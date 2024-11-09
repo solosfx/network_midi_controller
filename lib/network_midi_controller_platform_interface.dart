@@ -33,6 +33,16 @@ abstract class NetworkMidiControllerPlatform extends PlatformInterface {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
+  /// Method to enable the MIDI Network Session.
+  Future<void> enableService() {
+    throw UnimplementedError('enableService() has not been implemented.');
+  }
+
+  /// Method to disable the MIDI Network Session.
+  Future<void> disableService() {
+    throw UnimplementedError('disableService() has not been implemented.');
+  }
+
   /// Method to send a MIDI command.
   Future<void> sendMIDICommand({
     required int channelCommand,

@@ -29,7 +29,13 @@ public class NetworkMidiControllerPlugin: NSObject, FlutterPlugin {
             }
         } else if call.method == "getPlatform" {
             result("iOS")
-        } else {
+        } else if call.method == "enableService" {
+            midiController.enableService()
+            result(nil)
+        } else if call.method == "disableService" {
+            midiController.disableService()
+            result(nil)
+        }else {
             result(FlutterMethodNotImplemented)
         }
     }
@@ -45,6 +51,14 @@ class MidiControllerManager {
     func sendMIDICommand(command: UInt8, note: UInt8, velocity: UInt8) {
         midiSender?.sendMIDICommand(command: command, note: note, velocity: velocity)
     }
+    
+    func enableService() {
+        midiSender?.enableService()
+    }
+    
+    func disableService() {
+        midiSender?.disableService()
+    }
 }
 
 class MIDISender {
@@ -55,10 +69,18 @@ class MIDISender {
     init() {
         // Set up the MIDI network session
         session = MIDINetworkSession.default()
-        session.isEnabled = true
+        session.isEnabled = false
         session.connectionPolicy = .anyone
         MIDIClientCreate("MIDI Controller Client" as CFString, nil, nil, &midiClient)
         MIDIOutputPortCreate(midiClient, "MIDI Controller Port" as CFString, &midiOutPort)
+    }
+    
+    func enableService() {
+        session.isEnabled = true
+    }
+    
+    func disableService() {
+        session.isEnabled = false
     }
     
     func sendMIDICommand(command: UInt8, note: UInt8, velocity: UInt8) {
