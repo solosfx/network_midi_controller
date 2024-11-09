@@ -5,11 +5,13 @@ import 'package:network_midi_controller/network_midi_controller_method_channel.d
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelNetworkMidiController platform = MethodChannelNetworkMidiController();
+  MethodChannelNetworkMidiController platform =
+      MethodChannelNetworkMidiController();
   const MethodChannel channel = MethodChannel('network_midi_controller');
 
   setUp(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
       channel,
       (MethodCall methodCall) async {
         return '42';
@@ -18,10 +20,11 @@ void main() {
   });
 
   tearDown(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, null);
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(channel, null);
   });
 
   test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
+    expect(await platform.getPlatform(), 'iOS');
   });
 }

@@ -7,13 +7,27 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockNetworkMidiControllerPlatform
     with MockPlatformInterfaceMixin
     implements NetworkMidiControllerPlatform {
+  @override
+  Future<String?> getPlatform() => Future.value('iOS');
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Future<void> initialize() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> sendMIDICommand({
+    required int channelCommand,
+    required int midiNote,
+    required int velocity,
+  }) {
+    throw UnimplementedError();
+  }
 }
 
 void main() {
-  final NetworkMidiControllerPlatform initialPlatform = NetworkMidiControllerPlatform.instance;
+  final NetworkMidiControllerPlatform initialPlatform =
+      NetworkMidiControllerPlatform.instance;
 
   test('$MethodChannelNetworkMidiController is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelNetworkMidiController>());
@@ -21,9 +35,10 @@ void main() {
 
   test('getPlatformVersion', () async {
     NetworkMidiController networkMidiControllerPlugin = NetworkMidiController();
-    MockNetworkMidiControllerPlatform fakePlatform = MockNetworkMidiControllerPlatform();
+    MockNetworkMidiControllerPlatform fakePlatform =
+        MockNetworkMidiControllerPlatform();
     NetworkMidiControllerPlatform.instance = fakePlatform;
 
-    expect(await networkMidiControllerPlugin.getPlatformVersion(), '42');
+    expect(await networkMidiControllerPlugin.getPlatform(), 'iOS');
   });
 }

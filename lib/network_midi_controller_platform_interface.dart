@@ -8,7 +8,8 @@ abstract class NetworkMidiControllerPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static NetworkMidiControllerPlatform _instance = MethodChannelNetworkMidiController();
+  static NetworkMidiControllerPlatform _instance =
+      MethodChannelNetworkMidiController();
 
   /// The default instance of [NetworkMidiControllerPlatform] to use.
   ///
@@ -23,7 +24,21 @@ abstract class NetworkMidiControllerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<String?> getPlatform() {
+    throw UnimplementedError('getPlatform() has not been implemented.');
+  }
+
+  /// Method to initialize the MIDI controller.
+  Future<void> initialize() {
+    throw UnimplementedError('initialize() has not been implemented.');
+  }
+
+  /// Method to send a MIDI command.
+  Future<void> sendMIDICommand({
+    required int channelCommand,
+    required int midiNote,
+    required int velocity,
+  }) {
+    throw UnimplementedError('sendMIDICommand() has not been implemented.');
   }
 }
